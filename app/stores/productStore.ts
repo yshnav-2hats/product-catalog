@@ -37,11 +37,16 @@ export const useProductStore = defineStore('products',() => {
         )
     }
 
+    function getCategories(): string[] {
+        return [...new Set(products.value.map(product => product.category))]
+      }
+
     return {
         products,
         loading,
         error,
         fetchProducts,
-        searchProducts
+        searchProducts,
+        getCategories
     }
 })

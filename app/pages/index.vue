@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useProductStore } from '../stores/productStore'
 import ProductSearch from '../components/ProductSearch.vue'
+import CategoryFilter from '../components/CategoryFilter.vue'
 
 const productStore = useProductStore()
 
@@ -12,9 +13,15 @@ const error = computed(() => productStore.error)
 
 const searchTerm = ref('')
 
-const filteredProducts = computed(() => 
-  productStore.searchProducts(searchTerm.value)
+const filteredProducts = computed(() =>
+  productStore.searchProducts(searchTerm.value).filter(product =>
+    !selectedCategory.value || product.category === selectedCategory.value
+  )
 )
+
+const selectedCategory = ref('')
+
+const categories = computed(() => productStore.getCategories())
 </script>
 
 <template>
@@ -23,6 +30,11 @@ const filteredProducts = computed(() =>
     <p>Browse our products below.</p>
 
     <ProductSearch v-model="searchTerm" />
+
+    <CategoryFilter
+      v-model="selectedCategory"
+      :categories="categories"
+    />
 
     <p v-if="loading">Loading products...</p>
 
