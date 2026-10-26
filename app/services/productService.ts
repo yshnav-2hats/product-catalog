@@ -1,6 +1,6 @@
 import type { Product } from '../types/product'
 
-const API_URL = 'https://dummyjson.com/products'
+const API_URL = 'https://dummyjson.com/products?limit=0'
 
 interface ProductApiResponse {
   products: Product[]
