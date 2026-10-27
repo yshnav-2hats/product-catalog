@@ -27,6 +27,11 @@ const categories = computed(() => productStore.getCategories())
 <template>
   <main>
     <h1>Product Catalog</h1>
+
+    <NuxtLink to="/cart">
+      View Cart
+    </NuxtLink>
+
     <p>Browse our products below.</p>
 
     <ProductSearch v-model="searchTerm" />
